@@ -1,7 +1,7 @@
 Flexi Pages Widget
 ==================
 
-Flexi Pages Widget is a highly configurable [http://wordpress.org/](WordPress) sidebar widget to list pages and sub-pages. Can be used as an alternative to the default 'Pages' widget.
+Flexi Pages Widget is a highly configurable [WordPress](http://wordpress.org/) sidebar widget to list pages and sub-pages. Can be used as an alternative to the default 'Pages' widget.
 
 
 Features
