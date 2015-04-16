@@ -27,6 +27,9 @@ License: GPL2
 */
 
 
+include_once( 'inc/class-flexi-pages.php' );
+include_once( 'inc/class-flexi-pages-widget.php' );
+
 
 function flexipages_init()
 {
@@ -35,7 +38,6 @@ function flexipages_init()
 		load_plugin_textdomain('flexipages', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 
-	include_once( 'inc/class-flexi-pages.php' );
 
 	/**
 	 * The flexipages() template function
@@ -81,6 +83,8 @@ function flexipages_init()
 	
 }
 
-add_action('plugins_loaded', 'flexipages_init');
+add_action( 'plugins_loaded', 'flexipages_init' );
+
+add_action( 'widgets_init', array('Flexi_Pages_Widget', 'register') );
 
 ?>

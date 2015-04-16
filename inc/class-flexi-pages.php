@@ -103,8 +103,10 @@ class Flexi_Pages {
 				$list_items .= $this->list_items($page['children'], $level+1);
 			$list_items.= "</li>\n";
 		}
-		if($list_items)
-			$list_items = str_repeat("\t", $level)."<ul>\n{$list_items}".str_repeat("\t", $level)."</ul>";
+		if($list_items) {
+			$ul_class = $level? ' class="children"': "";
+			$list_items = str_repeat("\t", $level)."<ul{$ul_class}>\n{$list_items}".str_repeat("\t", $level)."</ul>";
+		}
 		return $list_items;
 	}
 
@@ -202,7 +204,7 @@ class Flexi_Pages {
 				if($args['show_date']) {
 					$x = explode(" ", $page->post_date);
 					$y = explode("-", $x[0]);
-					$date = date($date_format, mktime(0, 0, 0, $y[1], $y[2], $y[0]));
+					$date = date($args['date_format'], mktime(0, 0, 0, $y[1], $y[2], $y[0]));
 				}
 				$class = "page_item page-item-".$page->ID;
 				if(is_page($page->ID))
