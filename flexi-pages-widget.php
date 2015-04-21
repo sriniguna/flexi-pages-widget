@@ -26,6 +26,7 @@ License: GPL2
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+define( 'FLEXI_PAGES_WIDGET_PLUGIN_VERSION', '1.7' );
 
 include_once( 'inc/class-flexi-pages.php' );
 include_once( 'inc/class-flexi-pages-widget.php' );
@@ -33,6 +34,12 @@ include_once( 'inc/class-flexi-pages-widget.php' );
 
 function flexipages_init()
 {
+	if( $old_widget_options = get_option( 'flexipages_widget') ) {
+		if( !( $new_widget_options = get_option( 'widget_flexipages') ) ) {
+			add_option( 'widget_flexipages', $old_widget_options );
+		}
+		delete_option( 'flexipages_widget' );
+	}
 
 	if(function_exists('load_plugin_textdomain'))
 		load_plugin_textdomain('flexipages', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
