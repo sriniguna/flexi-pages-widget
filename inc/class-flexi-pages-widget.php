@@ -37,12 +37,12 @@ class Flexi_Pages_Widget extends WP_Widget {
 			'hierarchy' => 'on', 
 			'depth' => 0, 
 			'show_subpages_check' => 'on', 
-			'show_subpages' => -2, 
+			'show_subpages' => 2, 
 			'show_home_check' => 'on',
 			'show_home' => __('Home', 'flexipages'), 
-			'show_date' => 'off',
+			'show_date' => '',
 			'date_format' => 'default',
-			'dropdown' => 'off',
+			'dropdown' => '',
 			);
 		return $default_widget_options;
 	}
@@ -63,9 +63,63 @@ class Flexi_Pages_Widget extends WP_Widget {
 			$options = $this->default_widget_options();
 		}
 
+		$flexi_pages_args = array(
+			'sort_column' => $options['sort_column'],
+			'sort_order' => $options['sort_order'],
+			'show_date' => $options['show_date'],
+			'date_format' => $options['date_format'],
+			);
+
+		if( $options['exinclude_values'] ) {
+			if( 'include' == $options['exinclude'] ) {
+				$flexi_pages_args['include'] = $options['exinclude_values'];
+			}
+			else {
+				$flexi_pages_args['exclude'] = $options['exinclude_values'];
+			}
+		}
+
+		if( $options['show_subpages_check'] ) {
+			if( 
+				2 == intval( $options['show_subpages'] )
+				|| -2 == intval( $options['show_subpages'] )
+				|| -2 == intval( $options['depth'] )
+				) {
+				$flexi_pages_args['show_subpages'] = 2;
+			}
+			else if( 
+				3 == intval( $options['show_subpages'] )
+				|| -3 == intval( $options['show_subpages'] )
+				|| -3 == intval( $options['depth'] )
+				) {
+				$flexi_pages_args['show_subpages'] = 3;
+			}
+			else {
+				$flexi_pages_args['show_subpages'] = 1;
+			}
+		}
+		else {
+			$flexi_pages_args['show_subpages'] = 0;
+		}
+
+		if( $options['hierarchy'] ) {
+			$flexi_pages_args['hierarchy'] = 1;
+			$flexi_pages_args['depth'] = intval( $options['depth'] );
+		}
+		else {
+			$flexi_pages_args['hierarchy'] = 0;
+			$flexi_pages_args['depth'] = 0;
+		}
+
+		if( $options['show_home_check'] ) {
+			$flexi_pages_args['show_home'] = $options['show_home']?$options['show_home']:__('Home', 'flexipages');
+		}		
+
 		// To-do frame the options to be passed to the Flexi_Pages constructor
 
-		$flexipages = new Flexi_Pages($options);
+		// echo "<pre>"; print_r($flexi_pages_args); echo "</pre>";
+
+		$flexipages = new Flexi_Pages($flexi_pages_args);
 		if( $options['dropdown'] == 'on' ) {
 			$flexipages_display = $flexipages->get_dropdown();
 		}
@@ -98,6 +152,7 @@ class Flexi_Pages_Widget extends WP_Widget {
 		if( $instance ) {
 			$options = array_merge( $options, $instance );
 		}
+		print_r($options);
 
 		$title = esc_attr($options['title']);
 
@@ -129,29 +184,31 @@ class Flexi_Pages_Widget extends WP_Widget {
 		$show_subpages_check_check = ($options['show_subpages_check'] == 'on')?' checked="checked"':'';
 		
 		$show_subpages_options = array(
-			0 => array( 'name' => __('Show all sub-pages', 'flexipages'), 'select' => false),
-			-2 => array( 'name' => __('Only related sub-pages', 'flexipages'), 'select' => false),
-			-3 => array( 'name' => __('Only strictly related sub-pages', 'flexipages'), 'select' => false),
+			'1' => array( 'name' => __('Show all sub-pages', 'flexipages'), 'select' => false),
+			'2' => array( 'name' => __('Only related sub-pages', 'flexipages'), 'select' => false),
+			'3' => array( 'name' => __('Only strictly related sub-pages', 'flexipages'), 'select' => false),
 			);
-		if($options['depth'] == -2)
-			$show_subpages_options[-2]['select'] = true;
-		else if($options['depth'] == -3)
-			$show_subpages_select[-3]['select'] = true;
+		// if($options['depth'] == '-2' || $options['show_subpages'] == '-2' || $options['show_subpages'] == -2 || $options['show_subpages'] == '2 ' || $options['show_subpages'] == 2 )
+		if( -2 == intval($options['depth']) || -2 == intval($options['show_subpages']) || 2 == intval($options['show_subpages']) )
+			$show_subpages_options['2']['select'] = true;
+		// else if($options['depth'] == '-3' || $options['show_subpages'] == '-3' || $options['show_subpages'] == -3 || $options['show_subpages'] == '3' || $options['show_subpages'] == 3)
+		else if( -3 == intval($options['depth']) || -3 == intval($options['show_subpages']) || 3 == intval($options['show_subpages']) )
+			$show_subpages_options['3']['select'] = true;
 		else
-			$show_subpages_select[$options['show_subpages']]['select'] = true;
+			$show_subpages_options[$options['show_subpages']]['select'] = true;
 
 		$show_subpages_display = $show_subpages_check_check?'':' style="display:none;"';
 		
 		$hierarchy_check = ($options['hierarchy'] == 'on')?' checked="checked"':'';
 		
 		$depth_options = array (
-			0 => array( 'name' => __('Unlimited depth', 'flexipages'), 'select' => false ),
-			2 => array( 'name' => sprintf( __('%d levels deep', 'flexipages'), 2 ),'select' => false ),
-			3 => array( 'name' => sprintf( __('%d levels deep', 'flexipages'), 3 ),'select' => false ),
-			4 => array( 'name' => sprintf( __('%d levels deep', 'flexipages'), 4 ),'select' => false ),
-			5 => array( 'name' => sprintf( __('%d levels deep', 'flexipages'), 5 ),'select' => false ),
+			'0' => array( 'name' => __('Unlimited depth', 'flexipages'), 'select' => false ),
+			'2' => array( 'name' => sprintf( __('%d levels deep', 'flexipages'), 2 ),'select' => false ),
+			'3' => array( 'name' => sprintf( __('%d levels deep', 'flexipages'), 3 ),'select' => false ),
+			'4' => array( 'name' => sprintf( __('%d levels deep', 'flexipages'), 4 ),'select' => false ),
+			'5' => array( 'name' => sprintf( __('%d levels deep', 'flexipages'), 5 ),'select' => false ),
 			);
-		if(in_array($options['depth'], array(0, 2, 3, 4, 5)))
+		if(in_array(intval($options['depth']), array(0, 2, 3, 4, 5)))
 			$depth_options[$options['depth']]['select'] = true;
 		else
 			$depth_options[0]['select'] = true;
@@ -161,6 +218,7 @@ class Flexi_Pages_Widget extends WP_Widget {
 		$show_home_check_check = ((isset($options['home_link']) && $options['home_link']) || $options['show_home_check'] == 'on')?' checked="checked"':'';
 		$show_home_display = $show_home_check_check?'':' style="display:none;"';
 		$show_home = isset($options['home_link'])?esc_attr($options['home_link']):esc_attr($options['show_home']);
+		if( !$show_home ) $show_home = __('Home', 'flexipages');
 		$show_date_check = ($options['show_date'] == 'on')?' checked="checked"':'';
 		$date_format_display = $show_date_check?'':' style="display:none;"';
 		$date_format_options = array(
@@ -194,7 +252,7 @@ class Flexi_Pages_Widget extends WP_Widget {
 					<select class="widefat" style="display:inline;width:auto;" name="<?php echo $this->get_field_name('sort_column'); ?>" id="<?php echo $this->get_field_id('sort_column'); ?>">
 						<?php $this->print_select_options( $sort_column_options ); ?>
 					</select>
-					<select class="widefat" style="display:inline;width:auto;" name="<php echo $this->get_field_name('sort_order'); ?>" id="<?php echo $this->get_field_id('sort_order'); ?>">
+					<select class="widefat" style="display:inline;width:auto;" name="<?php echo $this->get_field_name('sort_order'); ?>" id="<?php echo $this->get_field_id('sort_order'); ?>">
 						<?php $this->print_select_options( $sort_order_options ); ?>
 					</select>
 				</td>
@@ -256,7 +314,7 @@ class Flexi_Pages_Widget extends WP_Widget {
 					</label>
 				</p></td>
 				<td style="padding-left: 20px;">
-					<input<?php echo $show_home_display; ?> class="widefat" type="text" name="<?php echo $this->get_field_name('show_home'); ?>" id ="<?php echo $this->get_field_id('show_home'); ?>" value="<?php echo htmlspecialchars($options['show_home'], ENT_QUOTES); ?>" />
+					<input<?php echo $show_home_display; ?> class="widefat" type="text" name="<?php echo $this->get_field_name('show_home'); ?>" id ="<?php echo $this->get_field_id('show_home'); ?>" value="<?php echo htmlspecialchars($show_home, ENT_QUOTES); ?>" />
 				</td>
 			</tr>
 			<tr>
@@ -333,7 +391,16 @@ class Flexi_Pages_Widget extends WP_Widget {
 		$level = 0 ) {
 		
 		global $wpdb;
-		$items = get_pages("child_of={$parent}&parent={$parent}sort_column={$sort_column}&sort_order={$sort_order}" );
+
+		$get_pages_args = array( 
+			'sort_column' => $sort_column,
+			'sort_order' => $sort_order,
+			'child_of' => $parent,
+			'parent' => $parent,
+			);
+
+		$items = get_pages( $get_pages_args );
+		
 		if ( $items ) {
 			foreach ( $items as $item ) {
 				$pad = str_repeat( '&nbsp;', $level * 3 );

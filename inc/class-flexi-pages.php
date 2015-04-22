@@ -24,7 +24,7 @@ class Flexi_Pages {
 	private function default_args() {
 		return array(
 			'sort_column'            => 'post_title', 
-			'sort_order'             => 'asc', 
+			'sort_order'             => 'ASC', 
 			'exclude'                => '',
 			'include'                => '',
 			'child_of'               => 0,
@@ -69,7 +69,7 @@ class Flexi_Pages {
 		}
 
 		if($args['show_subpages'] == 0)
-			$args['depth'] = $default_args['depth'];
+			$args['depth'] = 1;
 
 		// print_r($args);
 		$this->args = $args;
@@ -163,10 +163,10 @@ class Flexi_Pages {
 			'sort_order' => $args['sort_order'],
 			) );
 		
-//		echo "<pre>";print_r($pages);echo "</pre>";
+		// echo "<pre>";print_r($pages);echo "</pre>";
 
 		$currpage_hierarchy = $this->get_currpage_hierarchy();
-//		echo "<pre>"; print_r($currpage_hierarchy); echo "</pre>";
+		// echo "<pre>"; print_r($currpage_hierarchy); echo "</pre>";
 		
 		
 		if( $args['show_date'] && ( !$args['date_format'] || 'default' == $args['date_format'] ) )
