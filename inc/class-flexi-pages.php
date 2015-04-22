@@ -27,12 +27,12 @@ class Flexi_Pages {
 			'sort_order'             => 'asc', 
 			'exclude'                => '',
 			'include'                => '',
-			'child_of'                => 0,
+			'child_of'               => 0,
 			'parent'                 => -1, 
 			'show_subpages'          => 2, 
 			'hierarchy'              => 1,
 			'depth'                  => 0, 
-			'show_home'              => __('Home', 'flexipages'), 
+			'show_home'              => '',
 			'show_date'              => 0,
 			'date_format'            => '',
 		);
@@ -118,7 +118,8 @@ class Flexi_Pages {
 		$depth = 0;
 		
 		foreach($pages as $page) {
-			if($page['date']) $date = " ".$page['date'];
+			$date = "";
+			if(isset($page['date']) && $page['date']) $date = " ".$page['date'];
 			if(is_page($page['ID'])) $selected = ' selected="selected"';
 			else $selected = '';
 			$dropdown_items .= str_repeat("\t", $depth+1).'<option class="level-'.$level.'" value="'.$page['ID'].'"'.$selected.'>'.str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;", $level).$page['title'].$date.'</option>'."\n";
@@ -131,7 +132,7 @@ class Flexi_Pages {
 	private function get_pages( $args = array(), $level = 1 ) {
 		$page_array = array();
 		
-		if( isset( $args['show_home'] ) && $args['show_home'] != 'off' ) {
+		if( isset( $args['show_home'] ) && $args['show_home'] ) {
 			$class = "home_page";
 			$class .= is_home()?" current_page_item":"";			
 			$page_array[] = array(
@@ -145,6 +146,7 @@ class Flexi_Pages {
 			
 		if($args['show_subpages'] == -2) $args['show_subpages'] = 2;
 		if($args['show_subpages'] == -3) $args['show_subpages'] = 3;
+		if($args['show_subpages'] == 0) $args['depth'] = 1;
 
 			
 		if(isset($args['hierarchy']) && ($args['hierarchy'] == '0' || $args['hierarchy'] == 'off'))
@@ -172,7 +174,13 @@ class Flexi_Pages {
 		
 		if($pages) {
 			foreach($pages as $page) {
-				if($args['show_subpages'] == 3 && !in_array($page->ID, $currpage_hierarchy) && $page->post_parent != $currpage_hierarchy[0] && $page->post_parent != $currpage_hierarchy[1] && $page->post_parent != 0)
+				if(
+					$args['show_subpages'] == 3 
+					&& !in_array($page->ID, $currpage_hierarchy) 
+					&& ( !isset($currpage_hierarchy[0]) || $page->post_parent != $currpage_hierarchy[0] )
+					&& ( !isset($currpage_hierarchy[1]) || $page->post_parent != $currpage_hierarchy[1] )
+					&& $page->post_parent != 0
+					)
 					continue;
 				
 					
