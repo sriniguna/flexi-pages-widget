@@ -15,7 +15,8 @@ class Flexi_Pages_Widget extends WP_Widget {
 		parent::__construct(
 			'flexipages', // Base ID
 			_x('Flexi Pages Widget', 'widget name', 'flexipages'), // Name
-			array( 'classname' => 'widget_pages widget_flexipages flexipages_widget', 'description' => _x('A highly configurable widget to list your pages and sub-pages', 'widget description', 'flexipages'), ) // Args
+			array( 'classname' => 'widget_pages widget_flexipages flexipages_widget', 'description' => _x('A highly configurable widget to list your pages and sub-pages', 'widget description', 'flexipages'), ), // Args
+			array( 'width' => '400' )
 			);
 	}
 
@@ -177,19 +178,19 @@ class Flexi_Pages_Widget extends WP_Widget {
 				?>
 		<table style="border-collapse: collapse; width: 100%; margin: 5px 0;">
 			<tr>
-				<td style="padding: 10px 0; line-height: 28px;">
-					<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title', 'flexipages'); ?></label>
+				<td>
+					<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title', 'flexipages'); ?></label></p><p>
 				</td>
-				<td style="padding: 10px 0 10px 20px;">
+				<td style="padding-left: 20px;">
 					<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
 				</td>
 			</tr>
 			
 			<tr>
-				<td style="padding: 10px 0; line-height: 28px;" valign="top">
-					<label for="<?php echo $this->get_field_id('sort_column'); ?>"><?php _e('Sort by', 'flexipages'); ?></label>
+				<td valign="top">
+					<p><label for="<?php echo $this->get_field_id('sort_column'); ?>"><?php _e('Sort by', 'flexipages'); ?></label></p>
 				</td>
-				<td style="padding: 10px 0 10px 20px;">
+				<td style="padding-left: 20px;">
 					<select class="widefat" style="display:inline;width:auto;" name="<?php echo $this->get_field_name('sort_column'); ?>" id="<?php echo $this->get_field_id('sort_column'); ?>">
 						<?php $this->print_select_options( $sort_column_options ); ?>
 					</select>
@@ -199,13 +200,13 @@ class Flexi_Pages_Widget extends WP_Widget {
 				</td>
 			</tr>
 			<tr>		
-				<td style="padding: 10px 0;" valign="top">
+				<td valign="top"><p>
 					<select class="widefat" style="display:inline;width:auto;" name="<?php echo $this->get_field_name('exinclude'); ?>" id="<?php echo $this->get_field_id('exinclude'); ?>">
 						<?php $this->print_select_options( $exinclude_options ); ?>
 					</select>
 					<?php _e('pages', 'flexipages'); ?>
-				</td>
-				<td style="padding: 10px 0 10px 20px;">
+				</p></td>
+				<td style="padding-left: 20px;"><p>
 					<select name="<?php echo $this->get_field_name('exinclude_values'); ?>[]" id="<?php echo $this->get_field_id('exinclude_values'); ?>" class="widefat" style="height:auto;max-height:6em" multiple="multiple" size="4">
 						<?php
 							$this->exinclude_options(
@@ -216,65 +217,65 @@ class Flexi_Pages_Widget extends WP_Widget {
 								0 );
 						 ?>
 					</select>
-					<br /><small class="setting-description">
+					<br/><small class="setting-description">
 						<?php _e('use &lt;Ctrl&gt; key to select multiple pages', 'flexipages'); ?>
 					</small>
-				</td>
+				</p></td>
 			</tr>
 			<tr>
-				<td style="padding: 10px 0; line-height: 28px;">
+				<td><p>
 					<label for="<?php echo $this->get_field_id('show_subpages_check'); ?>">
 						<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('show_subpages_check'); ?>" name="<?php echo $this->get_field_name('show_subpages_check'); ?>" onchange="if(this.checked) { getElementById('<?php echo $this->get_field_id('show_subpages'); ?>').style.display='block'; } else { getElementById('<?php echo $this->get_field_id('show_subpages'); ?>').style.display='none'; }"<?php echo $show_subpages_check_check; ?> /> 
 						<?php _e('Show sub-pages', 'flexipages'); ?>
 					</label>
-				</td>
-				<td style="padding: 10px 0 10px 20px;">
+				</p></td>
+				<td style="padding-left: 20px;">
 					<select<?php echo $show_subpages_display; ?> class="widefat" id="<?php echo $this->get_field_id('show_subpages'); ?>" name="<?php echo $this->get_field_name('show_subpages'); ?>">
 						<?php $this->print_select_options( $show_subpages_options ); ?>
 					</select>
 				</td>
 			</tr>	
 			<tr>
-				<td style="padding: 10px 0; line-height: 28px;">
+				<td><p>
 					<label for="<?php echo $this->get_field_id('hierarchy'); ?>">
 						<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('hierarchy'); ?>" name="<?php echo $this->get_field_name('hierarchy'); ?>" onchange="if(this.checked) { getElementById('<?php echo $this->get_field_id('depth'); ?>').style.display='block'; } else { getElementById('<?php echo $this->get_field_id('depth'); ?>').style.display='none'; }"<?php echo $hierarchy_check; ?> /> 
 						<?php _e('Show hierarchy', 'flexipages'); ?>
 					</label>
-				</td>
-				<td style="padding: 10px 0 10px 20px;">
+				</p></td>
+				<td style="padding-left: 20px;">
 					<select<?php echo $depth_display; ?> class="widefat" id="<?php echo $this->get_field_id('depth'); ?>" name="<?php echo $this->get_field_name('depth'); ?>">
 						<?php $this->print_select_options( $depth_options ); ?>
 					</select>
 				</td>
 			</tr>
 			<tr>
-				<td style="padding: 10px 0; line-height: 28px;">
+				<td><p>
 					<label for="<?php echo $this->get_field_id('show_home_check'); ?>">
 						<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('show_home_check'); ?>" name="<?php echo $this->get_field_name('show_home_check'); ?>" onchange="if(this.checked) { getElementById('<?php echo $this->get_field_id('show_home'); ?>').style.display='block'; } else { getElementById('<?php echo $this->get_field_id('show_home'); ?>').style.display='none'; }"<?php echo $show_home_check_check; ?> /> 
 						<?php _e('Show home page', 'flexipages'); ?>
 					</label>
-				</td>
-				<td style="padding: 10px 0 10px 20px;">
+				</p></td>
+				<td style="padding-left: 20px;">
 					<input<?php echo $show_home_display; ?> class="widefat" type="text" name="<?php echo $this->get_field_name('show_home'); ?>" id ="<?php echo $this->get_field_id('show_home'); ?>" value="<?php echo htmlspecialchars($options['show_home'], ENT_QUOTES); ?>" />
-				</td>	
+				</td>
 			</tr>
 			<tr>
-				<td style="padding: 10px 0; line-height: 28px;">
+				<td><p>
 					<label for="<?php echo $this->get_field_id('show_date'); ?>">
 						<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('show_date'); ?>" name="<?php echo $this->get_field_name('show_date'); ?>" onchange="if(this.checked) { getElementById('<?php echo $this->get_field_id('date_format'); ?>').style.display='block'; } else { getElementById('<?php echo $this->get_field_id('date_format'); ?>').style.display='none'; }"<?php echo $show_date_check; ?> /> <?php _e('Show date', 'flexipages'); ?>
 					</label>
-				</td>
-				<td style="padding: 10px 0 10px 20px;">
+				</p></td>
+				<td style="padding-left: 20px;">
 					<select<?php echo $date_format_display; ?> class="widefat" id="<?php echo $this->get_field_id('date_format'); ?>" name="<?php echo $this->get_field_name('date_format'); ?>" text="Select format">
 						<?php $this->print_select_options( $date_format_options ); ?>
 					</select>
 				</td>
 			</tr>
 			<tr>
-				<td style="padding: 10px 0; line-height: 28px;" colspan="2">
+				<td colspan="2"><p>
 					<input name="<?php echo $this->get_field_name('dropdown'); ?>" id="<?php echo $this->get_field_id('dropdown'); ?>" type="checkbox"<?php echo $dropdown_check; ?> />
 					<label for="<?php echo $this->get_field_id('dropdown'); ?>"><?php _e('Show as dropdown', 'flexipages'); ?></label>
-				</td>
+				</p></td>
 			</tr>			
 		</table>
 		<?php
