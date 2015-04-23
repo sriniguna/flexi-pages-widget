@@ -14,8 +14,8 @@ class Flexi_Pages_Widget extends WP_Widget {
 	function __construct() {
 		parent::__construct(
 			'flexipages', // Base ID
-			_x('Flexi Pages Widget', 'widget name', 'flexipages'), // Name
-			array( 'classname' => 'widget_pages widget_flexipages flexipages_widget', 'description' => _x('A highly configurable widget to list your pages and sub-pages', 'widget description', 'flexipages'), ), // Args
+			__('Flexi Pages Widget', 'flexipages'), // Name
+			array( 'classname' => 'widget_pages widget_flexipages flexipages_widget', 'description' => __('A highly configurable widget to list pages and sub-pages.', 'flexipages'), ), // Args
 			array( 'width' => '400' )
 			);
 	}

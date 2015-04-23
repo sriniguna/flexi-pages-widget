@@ -1,0 +1,111 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Flexi Pages Widget 1.7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-03 12:08+0530\n"
+"PO-Revision-Date: 2015-04-23 11:32+0530\n"
+"Last-Translator: Srini <s@srinig.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.5.4\n"
+"Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
+"Language: Tamil\n"
+"X-Poedit-SearchPath-0: \n"
+
+msgid "Pages"
+msgstr "பக்கங்கள்"
+
+msgid "Home"
+msgstr "முகப்பு"
+
+msgid "Title"
+msgstr "தலைப்பு"
+
+msgid "Sort by"
+msgstr "வரிசைப்படுத்தல்"
+
+msgid "Page title"
+msgstr "பக்கத்தலைப்பு"
+
+msgid "Menu order"
+msgstr "மெனு முறை"
+
+msgid "Date created"
+msgstr "உருவாக்கிய தேதி"
+
+msgid "Date modified"
+msgstr "மாற்றப்பட்ட தேதி"
+
+msgid "Page ID"
+msgstr "பக்க எண்"
+
+msgid "Page author ID"
+msgstr "எழுதியவர் எண்"
+
+msgid "Page slug"
+msgstr "பக்க குறியீடு"
+
+msgid "ASC"
+msgstr "நேர் வரிசை"
+
+msgid "DESC"
+msgstr "தலைகீழ் வரிசை"
+
+msgid "Exclude"
+msgstr "விலக்கப்படும்"
+
+msgid "Include"
+msgstr "காட்டப்படும்"
+
+msgid "pages"
+msgstr "பக்கங்கள்"
+
+msgid "use &lt;Ctrl&gt; key to select multiple pages"
+msgstr "ஒன்றுக்குமேற்பட்ட பக்கங்களை தேர்ந்தெடுக்க &lt;Ctrl&gt; விசையை பயன்படுத்தவும்"
+
+msgid "Show sub-pages"
+msgstr "உள் பக்கங்களை காட்டவும்"
+
+msgid "Show all sub-pages"
+msgstr "அனைத்து உள் பக்கங்கள்"
+
+msgid "Only related sub-pages"
+msgstr "தொடர்புள்ள உள் பக்கங்கள் மட்டும்"
+
+msgid "Only strictly related sub-pages"
+msgstr "நேரடியாக தொடர்புள்ள உள் பக்கங்கள் மட்டும்"
+
+msgid "Show hierarchy"
+msgstr "படிநிலையாக காட்டவும்"
+
+#, php-format
+msgid "%d levels deep"
+msgstr "%d நிலை ஆழம்"
+
+msgid "Unlimited depth"
+msgstr "அளவில்லா ஆழம்"
+
+msgid "Show home page"
+msgstr "முகப்பு பக்கத்தை காட்டவும்"
+
+msgid "Show date"
+msgstr "தேதியை காட்டவும்"
+
+msgid "Choose Format"
+msgstr "தேதி வடிவம்"
+
+msgid "A highly configurable widget to list pages and sub-pages."
+msgstr ""
+"பக்கங்களையும் உள்பக்கங்களையும் வரிசைப்படுத்தி காட்டுவதற்காக பலதரப்பட்ட விருப்பத்தேர்வுகள் "
+"கொண்ட ஒரு விஜ்ஜெட்."
+
+msgid "Go"
+msgstr "செல்"
+
+msgid "Show as dropdown"
+msgstr "தொங்கு பட்டியலாக காட்டவும்"
