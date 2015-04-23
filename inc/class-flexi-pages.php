@@ -39,6 +39,7 @@ class Flexi_Pages {
 	}
 
 	private function accept_args( $args ) {
+
 		$default_args = $this->default_args();
 
 		$args = array_merge( $default_args, $args );
@@ -52,7 +53,7 @@ class Flexi_Pages {
 			$args['sort_order'] = $default_args['sort_order'];
 		}
 
-		if($args['include'] && ($args['hierarchy'] == '1' || $args['hierarchy'] == 'on')) {
+		if($args['include'] && $args['hierarchy']) {
 			$inc_array = explode(',', $args['include']);
 			if($args['exclude']) $exc_array = explode(',', $args['exclude']); else $exc_array = array();
 			$page_ids = $this->pageids();
@@ -71,7 +72,6 @@ class Flexi_Pages {
 		if($args['show_subpages'] == 0)
 			$args['depth'] = 1;
 
-		// print_r($args);
 		$this->args = $args;
 	}
 
@@ -131,7 +131,7 @@ class Flexi_Pages {
 
 	private function get_pages( $args = array(), $level = 1 ) {
 		$page_array = array();
-		
+
 		if( isset( $args['show_home'] ) && $args['show_home'] ) {
 			$class = "home_page";
 			$class .= is_home()?" current_page_item":"";			
@@ -163,10 +163,8 @@ class Flexi_Pages {
 			'sort_order' => $args['sort_order'],
 			) );
 		
-		// echo "<pre>";print_r($pages);echo "</pre>";
 
 		$currpage_hierarchy = $this->get_currpage_hierarchy();
-		// echo "<pre>"; print_r($currpage_hierarchy); echo "</pre>";
 		
 		
 		if( $args['show_date'] && ( !$args['date_format'] || 'default' == $args['date_format'] ) )

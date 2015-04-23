@@ -152,7 +152,6 @@ class Flexi_Pages_Widget extends WP_Widget {
 		if( $instance ) {
 			$options = array_merge( $options, $instance );
 		}
-		print_r($options);
 
 		$title = esc_attr($options['title']);
 
@@ -188,25 +187,23 @@ class Flexi_Pages_Widget extends WP_Widget {
 			'2' => array( 'name' => __('Only related sub-pages', 'flexipages'), 'select' => false),
 			'3' => array( 'name' => __('Only strictly related sub-pages', 'flexipages'), 'select' => false),
 			);
-		// if($options['depth'] == '-2' || $options['show_subpages'] == '-2' || $options['show_subpages'] == -2 || $options['show_subpages'] == '2 ' || $options['show_subpages'] == 2 )
-		if( -2 == intval($options['depth']) || -2 == intval($options['show_subpages']) || 2 == intval($options['show_subpages']) )
+		if( 1 == intval($options['show_subpages']) || !$options['show_subpages'])
+			$show_subpages_options['1']['select'] = true;
+		else if( -2 == intval($options['depth']) || -2 == intval($options['show_subpages']) || 2 == intval($options['show_subpages']) )
 			$show_subpages_options['2']['select'] = true;
-		// else if($options['depth'] == '-3' || $options['show_subpages'] == '-3' || $options['show_subpages'] == -3 || $options['show_subpages'] == '3' || $options['show_subpages'] == 3)
 		else if( -3 == intval($options['depth']) || -3 == intval($options['show_subpages']) || 3 == intval($options['show_subpages']) )
 			$show_subpages_options['3']['select'] = true;
-		else
-			$show_subpages_options[$options['show_subpages']]['select'] = true;
 
 		$show_subpages_display = $show_subpages_check_check?'':' style="display:none;"';
 		
 		$hierarchy_check = ($options['hierarchy'] == 'on')?' checked="checked"':'';
 		
 		$depth_options = array (
-			'0' => array( 'name' => __('Unlimited depth', 'flexipages'), 'select' => false ),
 			'2' => array( 'name' => sprintf( __('%d levels deep', 'flexipages'), 2 ),'select' => false ),
 			'3' => array( 'name' => sprintf( __('%d levels deep', 'flexipages'), 3 ),'select' => false ),
 			'4' => array( 'name' => sprintf( __('%d levels deep', 'flexipages'), 4 ),'select' => false ),
 			'5' => array( 'name' => sprintf( __('%d levels deep', 'flexipages'), 5 ),'select' => false ),
+			'0' => array( 'name' => __('Unlimited depth', 'flexipages'), 'select' => false ),
 			);
 		if(in_array(intval($options['depth']), array(0, 2, 3, 4, 5)))
 			$depth_options[$options['depth']]['select'] = true;
@@ -229,7 +226,11 @@ class Flexi_Pages_Widget extends WP_Widget {
 			'd/m/Y' => array( 'name' => 'd/m/Y', 'select' => false ),
 			'm/d/Y' => array( 'name' => 'm/d/Y', 'select' => false ),
 			);
-		$date_format_options[$options['date_format']]['select'] = ' selected="selected"';
+		if( !$options['date_format'] ) {
+			$date_format_options['default']['select'] = true;
+		} else {
+			$date_format_options[$options['date_format']]['select'] = true;
+		}
 		$dropdown_check = ($options['dropdown'] == 'on')?' checked="checked"':'';
 
 
