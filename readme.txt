@@ -1,9 +1,9 @@
 === Flexi Pages Widget ===
 Contributors: SriniG
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8110402
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DSNGRBY45KRX8
 Tags: pages, subpages, menu, hierarchy, sidebar, widget, navigation
-Requires at least: 2.7
-Tested up to: 3.6-beta3-24407
+Requires at least: 3.0
+Tested up to: 4.2-RC4-32271
 Stable tag: trunk
 
 A highly configurable WordPress sidebar widget to list pages and sub-pages. User friendly widget control comes with various options. 
@@ -19,8 +19,8 @@ Features:
 * Option to include a link to the home page.
 * Other options include title, sort column/order, hierarchical/flat format, show date, show as dropdown.
 * Multiple instances of the widget. Unlimited number of instances of the widget can be added to the sidebar.
-* Instead of using the widget, the function flexipages() can be called from anywhere in the template. For the list of parameters that can be passed on to this function, refer [Other Notes](http://wordpress.org/extend/plugins/flexi-pages-widget/other_notes/).
-* Widget options menu is internationalized. Please refer [Other Notes](http://wordpress.org/extend/plugins/flexi-pages-widget/other_notes/) for the full list of languages in which the plugin is localized and translation credits.
+* Instead of using the widget, the function flexipages() can be called from anywhere in the template. For the list of parameters that can be passed on to this function, refer [Other Notes](https://wordpress.org/plugins/flexi-pages-widget/other_notes/).
+* Widget options menu is internationalized. Please refer [Other Notes](https://wordpress.org/plugins/flexi-pages-widget/other_notes/) for the full list of languages in which the plugin is localized and translation credits.
 
 == Installation ==
 
@@ -61,7 +61,7 @@ The built-in WP function `get_pages()` doesn't list private pages and doesn't ha
 
 = Where do I ask a question about the plugin? =
 
-Leave your questions, suggestions, bug reports, etc., as a comment at the [plugin page](http://srinig.com/wordpress/plugins/flexi-pages/ "Flexi Pages Widget") or through [contact form](http://srinig.com/wordpress/contact/) at the author's website. Questions frequently asked will be incorporated into the FAQ section in future versions of the plugin.
+Plese use the [WordPress support forums](https://wordpress.org/support/plugin/flexi-pages-widget) to ask a question. You can also [contact](http://srinig.com/wordpress/contact/) the plugin author directly. Questions frequently asked will be incorporated into the FAQ section in future versions of the plugin.
 
 == Screenshots ==
 
@@ -96,6 +96,7 @@ As of the current version, Flexi Pages Widget is translated into the following l
 * Russian (`ru_RU`) by [Fat Cow](http://www.fatcow.com)
 * Serbian (`sr_RS`) by [Mike Arias](http://www.inmotionhosting.com/)
 * Swedish (`sv_SE`) by Ove Kaufeldt
+* Tamil (`ta_IN`) by Srini
 * Turkish (`tr_TR`) by [Hakan Demiray](http://www.dmry.net/)
 * Ukrainian (`uk_UA`) by [wpp.pp.ua](http://wpp.pp.ua/)
 * Chinese (`zh_CN`) by Kaijia Feng
@@ -195,6 +196,11 @@ Instead of using the widget, the function flexipages() can be called from anywhe
 * `flexipages('sort_column=ID&exclude=2,10,14')` will display the list with items sorted in order of ID. The page IDs 2, 10 and 14 will be excluded.
 
 == Changelog ==
+
+= v1.7 (2015-04-23) =
+* Fixes for errors and warnings
+* Better code structure, compatible with the latest WP version and the latest WP best practices
+* Added localization in Tamil
 
 = v1.6.13 (2013-06-04) =
 * Fixes the bug introduced in previous update where an empty home page listing is introduced even when the home page link is disabled.
@@ -315,6 +321,9 @@ Instead of using the widget, the function flexipages() can be called from anywhe
 * Initial release
 
 == Upgrade Notice ==
+
+= 1.7 =
+Nothing new in terms of features, but many errors and bugs cleaned out, made compatible with latest WP version and best-practices.
 
 = 1.6.13 =
 Fixes a little bug introduced in v1.6.12. Upgrade recommended.
