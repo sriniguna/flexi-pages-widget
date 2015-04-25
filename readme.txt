@@ -3,7 +3,7 @@ Contributors: SriniG
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DSNGRBY45KRX8
 Tags: pages, subpages, menu, hierarchy, sidebar, widget, navigation
 Requires at least: 3.0
-Tested up to: 4.2-RC4-32271
+Tested up to: 4.2
 Stable tag: trunk
 
 A highly configurable WordPress sidebar widget to list pages and sub-pages. User friendly widget control comes with various options. 
