@@ -94,11 +94,15 @@ class Flexi_Pages {
 		$list_items = "";
 		
 		foreach($pages as $page) {
+
+			if( ! ( $link_text = get_post_meta( $page['ID'], 'flexipages_custom_link_text', true ) ) ) {
+				$link_text = $page['title'];
+			}
 			
 			$date = "";			
 			if(isset($page['date']) && $page['date']) $date = " ".$page['date'];
 			
-			$list_items .= str_repeat("\t", $level+1).'<li class="'.$page['class'].'"><a href="'.$page['link'].'" title="'.$page['title'].'">'.$page['title'].'</a>'.$date;
+			$list_items .= str_repeat("\t", $level+1).'<li class="'.$page['class'].'"><a href="'.$page['link'].'" title="'.$page['title'].'">'.esc_attr( $link_text ).'</a>'.$date;
 			if($page['children'])
 				$list_items .= $this->list_items($page['children'], $level+1);
 			$list_items.= "</li>\n";
@@ -118,11 +122,14 @@ class Flexi_Pages {
 		$depth = 0;
 		
 		foreach($pages as $page) {
+			if( ! ( $link_text = get_post_meta( $page['ID'], 'flexipages_custom_link_text', true ) ) ) {
+				$link_text = $page['title'];
+			}
 			$date = "";
 			if(isset($page['date']) && $page['date']) $date = " ".$page['date'];
 			if(is_page($page['ID'])) $selected = ' selected="selected"';
 			else $selected = '';
-			$dropdown_items .= str_repeat("\t", $depth+1).'<option class="level-'.$level.'" value="'.$page['ID'].'"'.$selected.'>'.str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;", $level).$page['title'].$date.'</option>'."\n";
+			$dropdown_items .= str_repeat("\t", $depth+1).'<option class="level-'.$level.'" value="'.$page['ID'].'"'.$selected.'>'.str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;", $level).esc_attr( $link_text ).$date.'</option>'."\n";
 			if($page['children'])
 				$dropdown_items .= $this->dropdown_items($page['children'], $level+1);
 		}
