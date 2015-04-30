@@ -11,7 +11,7 @@
  * License: GPL2
  */
 
-/*  Copyright 2007-2013 Srini G (email : srinig.com@gmail.com)
+/*  Copyright 2007-2015 Srini G (email : srinig.com@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
