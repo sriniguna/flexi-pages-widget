@@ -95,7 +95,11 @@ class Flexi_Pages {
 		
 		foreach($pages as $page) {
 
-			if( ! ( $link_text = get_post_meta( $page['ID'], 'flexipages_custom_link_text', true ) ) ) {
+			$page_options = get_post_meta( $page['ID'], 'flexipages_page_options', true );
+
+			if( isset( $page_options['custom_link_text'] ) && $page_options['custom_link_text'] ) {
+				$link_text = $page_options['custom_link_text'];
+			} else {
 				$link_text = $page['title'];
 			}
 			
@@ -122,7 +126,11 @@ class Flexi_Pages {
 		$depth = 0;
 		
 		foreach($pages as $page) {
-			if( ! ( $link_text = get_post_meta( $page['ID'], 'flexipages_custom_link_text', true ) ) ) {
+			$page_options = get_post_meta( $page['ID'], 'flexipages_page_options', true );
+
+			if( isset( $page_options['custom_link_text'] ) && $page_options['custom_link_text'] ) {
+				$link_text = $page_options['custom_link_text'];
+			} else {
 				$link_text = $page['title'];
 			}
 			$date = "";

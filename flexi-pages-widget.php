@@ -3,7 +3,7 @@
  * Plugin Name: Flexi Pages Widget
  * Plugin URI: http://srinig.com/wordpress/plugins/flexi-pages/
  * Description: A highly configurable WordPress sidebar widget to list pages and sub-pages. User friendly widget control comes with various options. 
- * Version: 1.8 alpha
+ * Version: 1.7.0.1
  * Author: Srini G
  * Author URI: http://srinig.com/wordpress
  * Text Domain: flexipages
@@ -11,7 +11,7 @@
  * License: GPL2
  */
 
-/*  Copyright 2007-2013 Srini G (email : srinig.com@gmail.com)
+/*  Copyright 2007-2015 Srini G (email : srinig.com@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -90,25 +90,29 @@ function flexipages_init()
 	
 }
 
-function flexipages_custom_link_text( $post ) {
-	wp_nonce_field( 'flexipages_custom_link_text', 'flexipages_custom_link_text_nonce' );
-	$value = get_post_meta( $post->ID, 'flexipages_custom_link_text', true);
-	echo '<input type="text" name="flexipages_custom_link_text" value="'.esc_attr($value).'" style="width: 100%" />';
+function flexipages_page_options( $post ) {
+	wp_nonce_field( 'flexipages_page_options', 'flexipages_page_options_nonce' );
+	$options = get_post_meta( $post->ID, 'flexipages_page_options', true);
+	$custom_link_text = isset( $options['custom_link_text'] )? esc_attr($options['custom_link_text']) : '';
+	echo '<label for="flexipages_custom_link_text">';
+	echo __( 'Custom link text', 'flexipages' );
+	echo '</label>';
+	echo '<input type="text" id="flexipages_custom_link_text" name="flexipages_custom_link_text" value="'.$custom_link_text.'" style="width: 100%" />';
 }
 
-function flexipages_custom_link_text_save( $post_id ) {
+function flexipages_page_options_save( $post_id ) {
 	/*
 	 * We need to verify this came from our screen and with proper authorization,
 	 * because the save_post action can be triggered at other times.
 	 */
 
 	// Check if our nonce is set.
-	if ( ! isset( $_POST['flexipages_custom_link_text_nonce'] ) ) {
+	if ( ! isset( $_POST['flexipages_page_options_nonce'] ) ) {
 		return;
 	}
 
 	// Verify that the nonce is valid.
-	if ( ! wp_verify_nonce( $_POST['flexipages_custom_link_text_nonce'], 'flexipages_custom_link_text' ) ) {
+	if ( ! wp_verify_nonce( $_POST['flexipages_page_options_nonce'], 'flexipages_page_options' ) ) {
 		return;
 	}
 
@@ -136,17 +140,17 @@ function flexipages_custom_link_text_save( $post_id ) {
 	}
 
 	// Sanitize user input.
-	$value = sanitize_text_field( $_POST['flexipages_custom_link_text'] );
+	$options['custom_link_text'] = sanitize_text_field( $_POST['flexipages_custom_link_text'] );
 
 	// Update the meta field in the database.
-	update_post_meta( $post_id, 'flexipages_custom_link_text', $value );
+	update_post_meta( $post_id, 'flexipages_page_options', $options );
 }
 
 function flexipages_add_meta_boxes() {
 	add_meta_box(
-		'flexipages_custom_link_text',
-		__( 'Flexi Pages Custom Link Text', 'flexipages' ),
-		'flexipages_custom_link_text',
+		'flexipages_page_options',
+		__( 'Flexi Pages Options', 'flexipages' ),
+		'flexipages_page_options',
 		'page',
 		'side'
 		);
@@ -155,6 +159,6 @@ function flexipages_add_meta_boxes() {
 add_action( 'plugins_loaded', 'flexipages_init' );
 add_action( 'widgets_init', array('Flexi_Pages_Widget', 'register') );
 add_action( 'add_meta_boxes', 'flexipages_add_meta_boxes' );
-add_action( 'save_post', 'flexipages_custom_link_text_save' );
+add_action( 'save_post', 'flexipages_page_options_save' );
 
 ?>
