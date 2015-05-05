@@ -3,7 +3,7 @@
  * Plugin Name: Flexi Pages Widget
  * Plugin URI: http://srinig.com/wordpress/plugins/flexi-pages/
  * Description: A highly configurable WordPress sidebar widget to list pages and sub-pages. User friendly widget control comes with various options. 
- * Version: 1.7
+ * Version: 1.7.1
  * Author: Srini G
  * Author URI: http://srinig.com/wordpress
  * Text Domain: flexipages
@@ -32,14 +32,22 @@
 include_once( 'inc/class-flexi-pages.php' );
 include_once( 'inc/class-flexi-pages-widget.php' );
 
+define( 'FLEXIPAGES_VERSION', '1.7.1' );
 
 function flexipages_init()
 {
 	if( $old_widget_options = get_option( 'flexipages_widget') ) {
-		if( !( $new_widget_options = get_option( 'widget_flexipages') ) ) {
+		if( get_option( 'widget_flexipages') ) {
+			update_option( 'widget_flexipages', $old_widget_options );
+		} else {
 			add_option( 'widget_flexipages', $old_widget_options );
 		}
 		delete_option( 'flexipages_widget' );
+	}
+
+	$plugin_version_stored = get_option( 'flexipages_version' );
+	if( $plugin_version_stored != FLEXIPAGES_VERSION ) {
+		add_option( 'flexipages_version', FLEXIPAGES_VERSION );
 	}
 
 	if(function_exists('load_plugin_textdomain'))

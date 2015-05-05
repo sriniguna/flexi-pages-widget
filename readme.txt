@@ -3,7 +3,7 @@ Contributors: SriniG
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DSNGRBY45KRX8
 Tags: pages, subpages, menu, hierarchy, sidebar, widget, navigation
 Requires at least: 3.0
-Tested up to: 4.2
+Tested up to: 4.2.1
 Stable tag: trunk
 
 A highly configurable WordPress sidebar widget to list pages and sub-pages. User friendly widget control comes with various options. 
@@ -197,6 +197,10 @@ Instead of using the widget, the function flexipages() can be called from anywhe
 
 == Changelog ==
 
+= v1.7.1 (2015-05-05) =
+* Fix to the issue where the options won't upgrade for some users. Thanks to joffs and other users for the inputs.
+* Storing the version number in the options table. Could come in handy during future updates.
+
 = v1.7 (2015-04-23) =
 * Fixes for errors and warnings
 * Better code structure, compatible with the latest WP version and the latest WP best practices
@@ -322,11 +326,5 @@ Instead of using the widget, the function flexipages() can be called from anywhe
 
 == Upgrade Notice ==
 
-= 1.7 =
-Nothing new in terms of features, but many errors and bugs cleaned out, made compatible with latest WP version and best-practices.
-
-= 1.6.13 =
-Fixes a little bug introduced in v1.6.12. Upgrade recommended.
-
-= 1.6 =
-New feature to display as dropdown added, translation in Catalan and Dutch languages added. Core rewritten. Upgrade recommended.
+= 1.7.1 =
+1.7 makes use of the WP Widgets API and cleans out many errors and bugs. 1.7.1 comes with a fix for the issue some users were having with upgrade to 1.7.
