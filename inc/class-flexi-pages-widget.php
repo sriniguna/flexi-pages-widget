@@ -115,8 +115,6 @@ class Flexi_Pages_Widget extends WP_Widget {
 			$flexi_pages_args['show_home'] = $options['show_home']?$options['show_home']:__('Home', 'flexipages');
 		}		
 
-		// To-do frame the options to be passed to the Flexi_Pages constructor
-
 		// echo "<pre>"; print_r($flexi_pages_args); echo "</pre>";
 
 		$flexipages = new Flexi_Pages($flexi_pages_args);

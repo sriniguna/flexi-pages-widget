@@ -116,6 +116,11 @@ class Flexi_Pages {
 
 		$dropdown_items = "";
 		$depth = 0;
+
+		// This adds a blank default item if we are in the home page and 'show_home' is not set
+		if( is_home() && !( isset($this->args['show_home']) && $this->args['show_home'] ) ) {
+			$dropdown_items .= "<option disabled selected><option>\n";
+		}
 		
 		foreach($pages as $page) {
 			$date = "";
@@ -142,7 +147,7 @@ class Flexi_Pages {
 				'children' => array(),
 				'class'    => $class,
 			);
-		}	
+		}
 			
 		if($args['show_subpages'] == -2) $args['show_subpages'] = 2;
 		if($args['show_subpages'] == -3) $args['show_subpages'] = 3;
