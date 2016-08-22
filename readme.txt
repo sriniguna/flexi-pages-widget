@@ -1,9 +1,8 @@
 === Flexi Pages Widget ===
 Contributors: SriniG
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DSNGRBY45KRX8
 Tags: pages, subpages, menu, hierarchy, sidebar, widget, navigation
 Requires at least: 3.0
-Tested up to: 4.5
+Tested up to: 4.6
 Stable tag: trunk
 
 A highly configurable WordPress sidebar widget to list pages and sub-pages. User friendly widget control comes with various options. 
@@ -197,6 +196,9 @@ Instead of using the widget, the function flexipages() can be called from anywhe
 
 == Changelog ==
 
+= v1.7.3 (2016-08-22) =
+* Fix
+
 = v1.7.2 (2016-04-13) =
 * Code to add a default blank item to dropdown when in home page and 'show_home' is not set. This is to make sure all other page items are clickable.
 
@@ -329,5 +331,5 @@ Instead of using the widget, the function flexipages() can be called from anywhe
 
 == Upgrade Notice ==
 
-= 1.7.1 =
-1.7 makes use of the WP Widgets API and cleans out many errors and bugs. 1.7.1 and 1.7.2 come with fixes.
+= 1.7.3 =
+1.7 makes use of the WP Widgets API and cleans out many errors and bugs. 1.7.1, 1.7.2 and 1.7.3 come with fixes.

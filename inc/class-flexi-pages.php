@@ -244,8 +244,10 @@ class Flexi_Pages {
 	private function get_currpage_hierarchy()
 	{
 		if(is_home() && !is_front_page()) {
-			if($curr_page_id = get_option('page_for_posts'))
-				$curr_page = &get_post($curr_page_id);
+			if($curr_page_id = get_option('page_for_posts')) {
+				$curr_page = get_post($curr_page_id);
+				$curr_page = &$curr_page;
+			}
 			else return array();
 		}
 		else if( is_page() ) {
